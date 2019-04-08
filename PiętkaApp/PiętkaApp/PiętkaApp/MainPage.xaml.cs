@@ -12,5 +12,9 @@ namespace PiętkaApp
         public MainPage() {
             InitializeComponent();
         }
+
+        private async void SwitchToSoundsPage(object sender, EventArgs e) {
+            Navigation.PushAsync(new SoundsPage());
+        }
     }
 }

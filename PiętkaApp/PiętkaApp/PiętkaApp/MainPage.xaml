@@ -2,13 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PiętkaApp"
-             x:Class="PiętkaApp.MainPage">
+             x:Class="PiętkaApp.MainPage"
+             Title="Main Page"
+             NavigationPage.HasNavigationBar="False">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Label Text="Pietka The App" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0"/>
+
+        <Button Text="Sounds" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="SwitchToSoundsPage"/>
+        <Button Text="Shopping" Margin="10" Grid.Column="0" Grid.Row="2"/>
+    </Grid>
 
 </ContentPage>
