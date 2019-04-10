@@ -14,7 +14,7 @@ namespace PiętkaApp
         }
 
         private async void SwitchToSoundsPage(object sender, EventArgs e) {
-            Navigation.PushAsync(new SoundsPage());
+            await Navigation.PushAsync(new SoundPage());
         }
     }
 }

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiętkaApp.iOS", "PiętkaAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiętkaApp.UWP", "PiętkaApp\PiętkaApp.UWP\PiętkaApp.UWP.csproj", "{7D7B3EB1-F1DA-4173-A2A2-19FF36C11CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiętkaApp", "PiętkaApp\PiętkaApp\PiętkaApp.csproj", "{CD1D7449-9068-4ED1-8600-39D67FA40047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiętkaApp", "PiętkaApp\PiętkaApp\PiętkaApp.csproj", "{CD1D7449-9068-4ED1-8600-39D67FA40047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
