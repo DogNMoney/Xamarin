@@ -11,12 +11,16 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
             <Label Text="Sounds Page" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0"/>
 
             <Button Text="Hello Darkness" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="PlayHelloDarkness"/>
             <Button Text="All Around Me" Margin="10" Grid.Column="0" Grid.Row="2" Pressed="PlayAllAroundMe"/>
+            <Button Text="Work work" Margin="10" Grid.Column="0" Grid.Row="3" Pressed="PlayWork"/>
+            <Button Text="Silent" Margin="10" Grid.Column="0" Grid.Row="4" Pressed="PlaySilentSound"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

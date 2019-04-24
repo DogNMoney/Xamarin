@@ -16,11 +16,15 @@ namespace PiętkaApp
     {
         ISimpleAudioPlayer helloDarknessPlayer = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
         ISimpleAudioPlayer allAroundMe = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
+        ISimpleAudioPlayer workWork = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
+        ISimpleAudioPlayer silentSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
 
         public SoundPage() {
             InitializeComponent();
             helloDarknessPlayer.Load("HelloDarkness.mp3");
             allAroundMe.Load("AllAroundMe.mp3");
+            workWork.Load("PracaPraca.mp3");
+            silentSound.Load("CricketSound.wav");
         }
 
         private void PlayHelloDarkness(object sender, EventArgs e) {
@@ -29,6 +33,14 @@ namespace PiętkaApp
 
         private void PlayAllAroundMe(object sender, EventArgs e) {
             allAroundMe.Play();
+        }
+
+        private void PlayWork(object sender, EventArgs e) {
+            workWork.Play();
+        }
+
+        private void PlaySilentSound(object sender, EventArgs e) {
+            silentSound.Play();
         }
     }
 }
