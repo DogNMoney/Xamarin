@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace PiętkaApp
-{
-    public partial class MainPage : ContentPage
-    {
+namespace PiętkaApp{
+
+    public partial class MainPage : ContentPage{
+
         public MainPage() {
             InitializeComponent();
         }

@@ -17,14 +17,16 @@
             </Grid.RowDefinitions>
 
             <Editor x:Name="EditorTransactionTitle" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="10" AutoSize="TextChanges" VerticalOptions="CenterAndExpand" Grid.RowSpan="2" Placeholder="Entry Transaction Title" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite"/>
-            <Entry x:Name="EntryTransactionValue" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="10" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" Placeholder="00,00" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite"/>
-            <Button Text="Substract" Grid.Column="0" Grid.Row="3"/>
-            <Button Text="Add" Grid.Column="1" Grid.Row="3"/>
+            <Entry x:Name="EntryTransactionValue" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="10" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" Placeholder="00,00" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite" Keyboard="Numeric" TextChanged="EntryTransactionInputChecker"/>
+            <Button Text="Substract" Grid.Column="0" Grid.Row="3" Pressed="TransactionSubstract"/>
+            <Button Text="Add" Grid.Column="1" Grid.Row="3" Pressed="TransactionAdd"/>
         </Grid>
     </ContentPage>
 
     <ContentPage Title="List View">
-        
+        <ScrollView>
+            <Label x:Name="LabelText" Text="TST" Margin="10" BackgroundColor="AntiqueWhite"/>
+        </ScrollView>
     </ContentPage>
     
     <ContentPage Title="TODO">
