@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLite;
 
 namespace PiętkaApp{
 
+    [Table("Transaction")]
     class Transaction {
-        DateTime date;
-        String title;
-        float cash;
 
-        public DateTime Date {
-            get { return this.date; }
-            set { this.date = value; }
+        [PrimaryKey, AutoIncrement]
+        int Id { get; set; }
+        DateTime Date { get; set; }
+        String Title { get; set; }
+        float Cash { get; set; }
+
+        public Transaction() {
+
         }
 
-        public String Title {
-            get { return this.title; }
-            set { this.title = value; }
-        }
-
-        public float Cash {
-            get { return this.cash; }
-            set { this.cash = value; }
+        public Transaction(DateTime date, String title, float cash) {
+            this.Date = date;
+            this.Title = title;
+            this.Cash = cash;
         }
 
         override
         public String ToString() {
             String combinedString;
 
-            combinedString = this.date.ToShortDateString() + "/r/n" + title + "/r/n" + cash;
+            combinedString = this.Date.ToShortDateString() + "/r/n" + this.Title + "/r/n" + this.Cash;
 
             return combinedString;
         }

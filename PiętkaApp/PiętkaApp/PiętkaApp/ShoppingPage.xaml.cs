@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using SQLite;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,18 +16,15 @@ namespace PiętkaApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShoppingPage : TabbedPage{
 
+        SQLiteConnection dataBase;
+
         public void WczytajHistorie() {
-            String path = "HistoriaDoladowan.txt";
+            String dataBasePath = "HistoriaDoladowan.txt";
 
             try {
-                if (File.Exists(path)) {
-                    String[] lines = File.ReadAllLines(path);
-                    foreach (String line in lines) {
-                        //this.ScrollViewHistory += line + "\r\n";
-                    }
-                } else {
-                    //this.HistoriaZPlikuBox.Text = "";
-                }
+                dataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),"Transactions.db3");
+                dataBase = new SQLiteConnection(dataBasePath);
+                dataBase.CreateTable<Transaction>();
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
@@ -34,20 +32,32 @@ namespace PiętkaApp
 
         public ShoppingPage() {
             InitializeComponent();
-            this.LabelText.Text = "Lorem Ipsum";
+        }
+
+        private void ClearInput() {
+            EditorTransactionTitle.Text = String.Empty;
+            EntryTransactionValue.Text = String.Empty;
         }
 
         private void TransactionSubstract(object sender, EventArgs e) {
+            Transaction transaction;
             try {
-
+                transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, -float.Parse(EntryTransactionValue.Text));
+                dataBase.Insert(transaction);
+                ClearInput();
+                DisplayAlert("Information", "Transaction Added", "Ok");
             }catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
         }
 
         private void TransactionAdd(object sender, EventArgs e) {
+            Transaction transaction;
             try {
-
+                transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValue.Text));
+                dataBase.Insert(transaction);
+                ClearInput();
+                DisplayAlert("Information", "Transaction Added", "Ok");
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
