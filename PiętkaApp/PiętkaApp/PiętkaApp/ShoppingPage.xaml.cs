@@ -18,20 +18,44 @@ namespace PiętkaApp
 
         SQLiteConnection dataBase;
 
-        public void WczytajHistorie() {
-            String dataBasePath = "HistoriaDoladowan.txt";
+        public void ReadDatabase() {
+            String dataBasePath = String.Empty;
 
             try {
-                dataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),"Transactions.db3");
+
+                String pathSufix = DateTime.Today.Month.ToString() + ".db3";
+                dataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufix);
+                if (!File.Exists(dataBasePath))
+                    DisplayAlert("Information", "New Database for new month created", "Ok");
+
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
+
             } catch (Exception ex) {
+                DisplayAlert("Exception!", ex.Message, "Ok");
+            }
+        }
+
+        public void ReadAndViewDatabase() {
+
+            String stringForLabel = String.Empty;
+
+            try {
+                var transactionViewString = dataBase.Table<Transaction>().ToList();
+                foreach(var singleTransaction in transactionViewString) {
+                    stringForLabel += singleTransaction.ToString() + "\r\n";
+                }
+
+                LabelView.Text = stringForLabel;
+            } catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
         }
 
         public ShoppingPage() {
             InitializeComponent();
+            ReadDatabase();
+            ReadAndViewDatabase();
         }
 
         private void ClearInput() {
@@ -44,6 +68,7 @@ namespace PiętkaApp
             try {
                 transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, -float.Parse(EntryTransactionValue.Text));
                 dataBase.Insert(transaction);
+                LabelView.Text += transaction.ToString() + "\r\n";
                 ClearInput();
                 DisplayAlert("Information", "Transaction Added", "Ok");
             }catch(Exception ex) {
@@ -56,6 +81,7 @@ namespace PiętkaApp
             try {
                 transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValue.Text));
                 dataBase.Insert(transaction);
+                LabelView.Text += transaction.ToString() + "\r\n";
                 ClearInput();
                 DisplayAlert("Information", "Transaction Added", "Ok");
             } catch (Exception ex) {
@@ -75,7 +101,6 @@ namespace PiętkaApp
                     entry.Text = entry.Text.Remove(entry.Text.Length-1, 1);
                 }
 
-                //DisplayAlert("Exception!", entry.Text.ToString(), "Ok");
             } catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }

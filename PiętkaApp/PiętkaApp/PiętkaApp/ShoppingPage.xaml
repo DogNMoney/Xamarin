@@ -25,7 +25,7 @@
 
     <ContentPage Title="List View">
         <ScrollView>
-            <Label x:Name="LabelText" Text="TST" Margin="10" BackgroundColor="AntiqueWhite"/>
+            <Label x:Name="LabelView" Margin="10" BackgroundColor="AntiqueWhite"/>
         </ScrollView>
     </ContentPage>
     
