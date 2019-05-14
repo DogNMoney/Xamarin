@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PiętkaApp.ShoppingPage">
   <!--Pages can be added as references or inline-->
-    <ContentPage Title="Add transaction">
+    <ContentPage Title="Main Page">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -13,13 +13,58 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="Own budget: " Grid.Column="0" Grid.Row="0" Margin="10"/>
+
+            <Label Text="Shop budget: " Grid.Column="0" Grid.Row="1" Margin="10"/>
+            <Label x:Name="LabelShoppingBudgetValue" Grid.Column="1" Grid.Row="1" Margin="10"/>
+
+            <Button x:Name="ButtonGoToSummary" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Text="Summary" Margin="10" Pressed="GoToSummary"/>
+        </Grid>
+    </ContentPage>
+
+    <ContentPage Title="Add transaction">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
-            <Editor x:Name="EditorTransactionTitle" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="10" AutoSize="TextChanges" VerticalOptions="CenterAndExpand" Grid.RowSpan="2" Placeholder="Entry Transaction Title" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite"/>
+            <Editor x:Name="EditorTransactionTitle" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" Margin="10" AutoSize="TextChanges" VerticalOptions="CenterAndExpand" Placeholder="Enter Transaction Title" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite"/>
             <Entry x:Name="EntryTransactionValue" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="10" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" Placeholder="00,00" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite" Keyboard="Numeric" TextChanged="EntryTransactionInputChecker"/>
-            <Button Text="Substract" Grid.Column="0" Grid.Row="3" Pressed="TransactionSubstract"/>
-            <Button Text="Add" Grid.Column="1" Grid.Row="3" Pressed="TransactionAdd"/>
+            <Button Text="Add" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Pressed="TransactionSubstract"/>
+        </Grid>
+    </ContentPage>
+
+    <ContentPage Title="Deposit Money">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Picker x:Name="PickerPerson" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Title="Choose Person">
+                <Picker.Items>
+                    <x:String>Paweł</x:String>
+                    <x:String>Kasia</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button Text="Add" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Pressed="TransactionAdd"/>
         </Grid>
     </ContentPage>
 

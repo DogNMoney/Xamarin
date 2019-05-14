@@ -38,15 +38,9 @@ namespace PiętkaApp
 
         public void ReadAndViewDatabase() {
 
-            String stringForLabel = String.Empty;
-
             try {
-                var transactionViewString = dataBase.Table<Transaction>().ToList();
-                foreach(var singleTransaction in transactionViewString) {
-                    stringForLabel += singleTransaction.ToString() + "\r\n";
-                }
-
-                LabelView.Text = stringForLabel;
+                ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelView);
+                ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
             } catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
@@ -58,18 +52,14 @@ namespace PiętkaApp
             ReadAndViewDatabase();
         }
 
-        private void ClearInput() {
-            EditorTransactionTitle.Text = String.Empty;
-            EntryTransactionValue.Text = String.Empty;
-        }
-
         private void TransactionSubstract(object sender, EventArgs e) {
             Transaction transaction;
             try {
                 transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, -float.Parse(EntryTransactionValue.Text));
                 dataBase.Insert(transaction);
                 LabelView.Text += transaction.ToString() + "\r\n";
-                ClearInput();
+                ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValue);
+                ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 DisplayAlert("Information", "Transaction Added", "Ok");
             }catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
@@ -79,10 +69,16 @@ namespace PiętkaApp
         private void TransactionAdd(object sender, EventArgs e) {
             Transaction transaction;
             try {
+                String pickerValue = PickerPerson.SelectedItem as String;
+                if (pickerValue != String.Empty || pickerValue != null){
+                    //TODO
+                }
+
                 transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValue.Text));
                 dataBase.Insert(transaction);
                 LabelView.Text += transaction.ToString() + "\r\n";
-                ClearInput();
+                ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValue);
+                ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 DisplayAlert("Information", "Transaction Added", "Ok");
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
@@ -104,6 +100,10 @@ namespace PiętkaApp
             } catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
+        }
+
+        private void GoToSummary(object sender, EventArgs e) {
+
         }
     }
 }
