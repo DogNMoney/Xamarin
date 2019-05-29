@@ -64,16 +64,10 @@
                 </Picker.Items>
             </Picker>
 
-            <Button Text="Add" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Pressed="TransactionAdd"/>
+            <Button Text="Add" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Pressed="TransactionAdd"/>
         </Grid>
     </ContentPage>
 
-    <ContentPage Title="List View">
-        <ScrollView>
-            <Label x:Name="LabelView" Margin="10" BackgroundColor="AntiqueWhite"/>
-        </ScrollView>
-    </ContentPage>
-    
     <ContentPage Title="TODO">
         
     </ContentPage>

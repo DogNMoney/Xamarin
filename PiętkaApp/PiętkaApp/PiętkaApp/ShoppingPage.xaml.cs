@@ -30,18 +30,9 @@ namespace PiętkaApp
 
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
+                ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
 
             } catch (Exception ex) {
-                DisplayAlert("Exception!", ex.Message, "Ok");
-            }
-        }
-
-        public void ReadAndViewDatabase() {
-
-            try {
-                ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelView);
-                ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
-            } catch(Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
         }
@@ -49,7 +40,6 @@ namespace PiętkaApp
         public ShoppingPage() {
             InitializeComponent();
             ReadDatabase();
-            ReadAndViewDatabase();
         }
 
         private void TransactionSubstract(object sender, EventArgs e) {
@@ -57,7 +47,6 @@ namespace PiętkaApp
             try {
                 transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, -float.Parse(EntryTransactionValue.Text));
                 dataBase.Insert(transaction);
-                LabelView.Text += transaction.ToString() + "\r\n";
                 ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValue);
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 DisplayAlert("Information", "Transaction Added", "Ok");
@@ -76,7 +65,6 @@ namespace PiętkaApp
 
                 transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValue.Text));
                 dataBase.Insert(transaction);
-                LabelView.Text += transaction.ToString() + "\r\n";
                 ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValue);
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 DisplayAlert("Information", "Transaction Added", "Ok");
@@ -102,8 +90,8 @@ namespace PiętkaApp
             }
         }
 
-        private void GoToSummary(object sender, EventArgs e) {
-
+        private async void GoToSummary(object sender, EventArgs e) {
+            await Navigation.PushAsync(new SummaryPage(dataBase));
         }
     }
 }

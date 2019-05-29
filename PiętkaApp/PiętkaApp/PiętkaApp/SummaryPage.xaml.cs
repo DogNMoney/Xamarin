@@ -6,15 +6,30 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SQLite;
 
 namespace PiętkaApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SummaryPage : TabbedPage
     {
-        public SummaryPage ()
+        SQLiteConnection dataBase;
+
+        public SummaryPage (SQLiteConnection connection)
         {
             InitializeComponent();
+            this.dataBase = connection;
+            ReadAndViewDatabase();
+        }
+
+
+        public void ReadAndViewDatabase() {
+
+            try {
+                ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelView);
+            } catch (Exception ex) {
+                DisplayAlert("Exception!", ex.Message, "Ok");
+            }
         }
     }
 }
