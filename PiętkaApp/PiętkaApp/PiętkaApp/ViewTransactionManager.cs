@@ -12,13 +12,21 @@ namespace PiętkaApp{
 
     static class ViewTransactionManager{
 
-        public static void ReadAndViewDatabase(SQLiteConnection dataBase, Label labelView) {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataBase"></param>
+        /// <param name="labelView"></param>
+        /// <param name="transactionFlag">False for transaction view True for deposit View</param>
+        public static void ReadAndViewDatabase(SQLiteConnection dataBase, Label labelView, bool transactionFlag) {
 
             String stringForLabel = String.Empty;
 
             var transactionViewString = dataBase.Table<Transaction>().ToList();
-            foreach (var singleTransaction in transactionViewString) {
-                stringForLabel += singleTransaction.ToString() + "\r\n";
+            foreach (Transaction singleTransaction in transactionViewString) {
+                if(transactionFlag == singleTransaction.IsDeposit) {
+                    stringForLabel += singleTransaction.ToString() + "\r\n";
+                }
             }
 
             labelView.Text = stringForLabel;

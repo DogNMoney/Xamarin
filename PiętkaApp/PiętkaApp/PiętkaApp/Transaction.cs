@@ -11,15 +11,24 @@ namespace PiętkaApp{
         public DateTime Date { get; set; }
         public String Title { get; set; }
         public float Cash { get; set; }
+        public bool IsDeposit { get; set; }
 
         public Transaction() {
 
         }
 
-        public Transaction(DateTime date, String title, float cash) {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="title"></param>
+        /// <param name="cash"></param>
+        /// <param name="isDeposit">True for deposit False for transaction</param>
+        public Transaction(DateTime date, String title, float cash, bool isDeposit) {
             this.Date = date;
             this.Title = title;
             this.Cash = cash;
+            this.IsDeposit = isDeposit;
         }
 
         override

@@ -45,9 +45,9 @@ namespace PiętkaApp
         private void TransactionSubstract(object sender, EventArgs e) {
             Transaction transaction;
             try {
-                transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, -float.Parse(EntryTransactionValue.Text));
+                transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, -float.Parse(EntryTransactionValueTransaction.Text), false);
                 dataBase.Insert(transaction);
-                ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValue);
+                ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValueTransaction);
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 DisplayAlert("Information", "Transaction Added", "Ok");
             }catch(Exception ex) {
@@ -60,14 +60,14 @@ namespace PiętkaApp
             try {
                 String pickerValue = PickerPerson.SelectedItem as String;
                 if (pickerValue != String.Empty || pickerValue != null){
-                    //TODO
+                    transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValueDeposit.Text), true);
+                    dataBase.Insert(transaction);
+                    ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValueDeposit);
+                    ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
+                    DisplayAlert("Information", "Transaction Added", "Ok");
+                } else {
+                    throw new Exception("Empty value of picker, please pick person");
                 }
-
-                transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValue.Text));
-                dataBase.Insert(transaction);
-                ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValue);
-                ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
-                DisplayAlert("Information", "Transaction Added", "Ok");
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }
@@ -92,6 +92,11 @@ namespace PiętkaApp
 
         private async void GoToSummary(object sender, EventArgs e) {
             await Navigation.PushAsync(new SummaryPage(dataBase));
+        }
+
+        private void ResetDB(object sender, EventArgs e) {
+            dataBase.DropTable<Transaction>();
+            DisplayAlert("Info", "DB Deleted", "Ok");
         }
     }
 }
