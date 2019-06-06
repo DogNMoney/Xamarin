@@ -68,13 +68,9 @@
 
             <Entry x:Name="EntryTransactionValueDeposit" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" Placeholder="00,00" PlaceholderColor="Gray" BackgroundColor="AntiqueWhite" Keyboard="Numeric" TextChanged="EntryTransactionInputChecker"/>
             <Label Text="Last deposite from: " Grid.Column="0" Grid.Row="2"/>
-            <Label x:Name="LabelLastDepositValue" Text="Nobody" Grid.Column="1" Grid.Row="3"/>
+            <Label x:Name="LabelLastDepositValue" Text="Nobody" Grid.Column="1" Grid.Row="2"/>
 
             <Button Text="Add" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Pressed="TransactionAdd"/>
         </Grid>
-    </ContentPage>
-
-    <ContentPage Title="TODO">
-        
     </ContentPage>
 </TabbedPage>

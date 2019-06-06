@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PiętkaApp.SummaryPage">
   <!--Pages can be added as references or inline-->
-    <ContentPage Title="List View">
+    <ContentPage Title="Transaction List:">
         <ScrollView>
-            <Label x:Name="LabelView" Margin="10" BackgroundColor="AntiqueWhite"/>
+            <Label x:Name="LabelTransactionList" Margin="10" BackgroundColor="AntiqueWhite"/>
         </ScrollView>
     </ContentPage>
-    <ContentPage Title="TODO" />
+    <ContentPage Title="Deposit List:">
+        <ScrollView>
+            <Label x:Name="LabelDepositList" Margin="10" BackgroundColor="AntiqueWhite"/>
+        </ScrollView>
+    </ContentPage>
 </TabbedPage>

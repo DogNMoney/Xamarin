@@ -37,7 +37,7 @@ namespace PiętkaApp{
             entry.Text = String.Empty;
         }
 
-        public static float CalculateBudget(SQLiteConnection dataBase, Label labelFirstPage) {
+        public static void CalculateBudget(SQLiteConnection dataBase, Label labelFirstPage) {
             float budget = 0f;
             
             var transactionViewString = dataBase.Table<Transaction>().ToList();
@@ -46,8 +46,22 @@ namespace PiętkaApp{
             }
 
             labelFirstPage.Text = Math.Round(budget, 2).ToString();
+        }
 
-            return 0f;
+        public static void SetLastDepositor(SQLiteConnection dataBase, Label labelLastPerson, Picker picker) {
+            String personString = String.Empty;
+            var people = picker.Items;
+
+            var transactionViewString = dataBase.Table<Transaction>().ToList();
+            foreach(var singleTransaction in transactionViewString) {
+                foreach(var person in people) {
+                    if (singleTransaction.Title.Contains(person)) {
+                        personString = person;
+                    }
+                }
+            }
+
+            labelLastPerson.Text = personString;
         }
     }
 }

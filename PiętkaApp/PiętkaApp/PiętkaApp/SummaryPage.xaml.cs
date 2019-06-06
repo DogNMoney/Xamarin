@@ -26,7 +26,8 @@ namespace PiętkaApp
         public void ReadAndViewDatabase() {
 
             try {
-                ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelView, false);
+                ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelTransactionList, false);
+                ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelDepositList, true);
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }

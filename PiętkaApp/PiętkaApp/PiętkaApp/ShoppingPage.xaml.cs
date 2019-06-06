@@ -31,6 +31,7 @@ namespace PiętkaApp
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
+                ViewTransactionManager.SetLastDepositor(dataBase, LabelLastDepositValue, PickerPerson);
 
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
@@ -57,13 +58,16 @@ namespace PiętkaApp
 
         private void TransactionAdd(object sender, EventArgs e) {
             Transaction transaction;
+            String transactionTitle = String.Empty;
             try {
                 String pickerValue = PickerPerson.SelectedItem as String;
                 if (pickerValue != String.Empty || pickerValue != null){
-                    transaction = new Transaction(DateTime.Now, EditorTransactionTitle.Text, float.Parse(EntryTransactionValueDeposit.Text), true);
+                    transactionTitle = "Wpłata od: " + pickerValue;
+                    transaction = new Transaction(DateTime.Now, transactionTitle, float.Parse(EntryTransactionValueDeposit.Text), true);
                     dataBase.Insert(transaction);
                     ViewTransactionManager.ClearInput(EditorTransactionTitle, EntryTransactionValueDeposit);
                     ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
+                    LabelLastDepositValue.Text = pickerValue;
                     DisplayAlert("Information", "Transaction Added", "Ok");
                 } else {
                     throw new Exception("Empty value of picker, please pick person");
