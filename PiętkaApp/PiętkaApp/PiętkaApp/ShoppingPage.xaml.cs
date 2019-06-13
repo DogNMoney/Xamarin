@@ -17,19 +17,27 @@ namespace PiętkaApp
     public partial class ShoppingPage : TabbedPage{
 
         SQLiteConnection dataBase;
+        SQLiteConnection dataBaseBusiness;
 
         public void ReadDatabase() {
             String dataBasePath = String.Empty;
+            String dataBaseBusinessPath = String.Empty;
 
             try {
 
                 String pathSufix = DateTime.Today.Month.ToString() + ".db3";
+                String pathSufixBS = DateTime.Today.Month.ToString() + "BS" + ".db3";
                 dataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufix);
+                dataBaseBusinessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufixBS);
+
                 if (!File.Exists(dataBasePath))
                     DisplayAlert("Information", "New Database for new month created", "Ok");
 
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
+                dataBaseBusiness = new SQLiteConnection(dataBaseBusiness);
+                dataBaseBusiness.CreateTable<Business>();
+
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 ViewTransactionManager.SetLastDepositor(dataBase, LabelLastDepositValue, PickerPerson);
 
@@ -101,6 +109,10 @@ namespace PiętkaApp
         private void ResetDB(object sender, EventArgs e) {
             dataBase.DropTable<Transaction>();
             DisplayAlert("Info", "DB Deleted", "Ok");
+        }
+
+        private async void GoToBusinessPanel(object sender, EventArgs e) {
+            await Navigation.PushAsync(new OwnBusiness(dataBaseBusiness));
         }
     }
 }

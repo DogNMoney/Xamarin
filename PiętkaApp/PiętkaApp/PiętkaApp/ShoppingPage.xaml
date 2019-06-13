@@ -14,13 +14,10 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
+            <Label Text="Shop budget: " Grid.Column="0" Grid.Row="0" Margin="10"/>
+            <Label x:Name="LabelShoppingBudgetValue" Grid.Column="1" Grid.Row="0" Margin="10"/>
 
-            <Label Text="Own budget: " Grid.Column="0" Grid.Row="0" Margin="10"/>
-
-            <Label Text="Shop budget: " Grid.Column="0" Grid.Row="1" Margin="10"/>
-            <Label x:Name="LabelShoppingBudgetValue" Grid.Column="1" Grid.Row="1" Margin="10"/>
-
-            <Button x:Name="ButtonGoToSummary" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Text="Summary" Margin="10" Pressed="GoToSummary"/>
+            <Button x:Name="ButtonGoToSummary" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Summary" Margin="10" Pressed="GoToSummary"/>
             <Button x:Name="ButtonResetDB" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Text="Reset DB" Margin="10" Pressed="ResetDB"/>
         </Grid>
     </ContentPage>
@@ -71,6 +68,25 @@
             <Label x:Name="LabelLastDepositValue" Text="Nobody" Grid.Column="1" Grid.Row="2"/>
 
             <Button Text="Add" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Pressed="TransactionAdd"/>
+        </Grid>
+    </ContentPage>
+
+    <ContentPage Title="Own Business">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="Budget: " Grid.Column="0" Grid.Row="0" Margin="10"/>
+            <Label x:Name="LabelBudgetValue" Grid.Column="1" Grid.Row="0" Margin="10"/>
+
+            <Button Text="Go To Business Panel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Pressed="GoToBusinessPanel"/>
         </Grid>
     </ContentPage>
 </TabbedPage>

@@ -52,13 +52,17 @@ namespace PiętkaApp{
             String personString = String.Empty;
             var people = picker.Items;
 
-            var transactionViewString = dataBase.Table<Transaction>().ToList();
-            foreach(var singleTransaction in transactionViewString) {
-                foreach(var person in people) {
-                    if (singleTransaction.Title.Contains(person)) {
-                        personString = person;
+            try {
+                var transactionViewString = dataBase.Table<Transaction>().ToList();
+                foreach (var singleTransaction in transactionViewString) {
+                    foreach (var person in people) {
+                        if (singleTransaction.Title.Contains(person)) {
+                            personString = person;
+                        }
                     }
                 }
+            }catch(Exception ex) {
+                throw ex;
             }
 
             labelLastPerson.Text = personString;
