@@ -35,7 +35,7 @@ namespace PiętkaApp
 
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
-                dataBaseBusiness = new SQLiteConnection(dataBaseBusiness);
+                dataBaseBusiness = new SQLiteConnection(dataBaseBusinessPath);
                 dataBaseBusiness.CreateTable<Business>();
 
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);

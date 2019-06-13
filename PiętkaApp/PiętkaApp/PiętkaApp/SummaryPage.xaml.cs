@@ -28,6 +28,9 @@ namespace PiętkaApp
             try {
                 ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelTransactionList, false);
                 ViewTransactionManager.ReadAndViewDatabase(dataBase, LabelDepositList, true);
+                ViewTransactionManager.CalculateBudget(dataBase, LabelSummaryBudgetValue);
+                ViewTransactionManager.CalculateMoneySpent(dataBase, LabelMoneySpentValue);
+                ViewTransactionManager.HowMuchAddedMoneyByPerson(dataBase, LabelPawełAddedValue, LabelKasiaAddedValue);
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
             }

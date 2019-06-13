@@ -48,6 +48,39 @@ namespace PiętkaApp{
             labelFirstPage.Text = Math.Round(budget, 2).ToString();
         }
 
+        public static void CalculateMoneySpent(SQLiteConnection dataBase, Label label) {
+            float moneySpent = 0f;
+
+            var transactionViewString = dataBase.Table<Transaction>().ToList();
+            foreach (var signleTransaction in transactionViewString) {
+                if(signleTransaction.IsDeposit == false) {
+                    moneySpent += signleTransaction.Cash;
+                }
+            }
+
+            moneySpent = moneySpent * (-1);
+            label.Text = Math.Round(moneySpent, 2).ToString();
+        }
+
+        public static void HowMuchAddedMoneyByPerson(SQLiteConnection dataBase, Label labelYou, Label labelAnotherPerson) {
+            float moneyAddedYou = 0f;
+            float moneyAddedAnotherPerson = 0f;
+
+            var transactionViewString = dataBase.Table<Transaction>().ToList();
+            foreach (var signleTransaction in transactionViewString) {
+                if (signleTransaction.IsDeposit == true) {
+                    if(signleTransaction.Title == "Kasia") {
+                        moneyAddedAnotherPerson += signleTransaction.Cash;
+                    } else {
+                        moneyAddedYou += signleTransaction.Cash;
+                    }
+                }
+            }
+
+            labelYou.Text = Math.Round(moneyAddedYou, 2).ToString();
+            labelAnotherPerson.Text = Math.Round(moneyAddedAnotherPerson, 2).ToString();
+        }
+
         public static void SetLastDepositor(SQLiteConnection dataBase, Label labelLastPerson, Picker picker) {
             String personString = String.Empty;
             var people = picker.Items;

@@ -17,7 +17,7 @@
             <Label Text="Shop budget: " Grid.Column="0" Grid.Row="0" Margin="10"/>
             <Label x:Name="LabelShoppingBudgetValue" Grid.Column="1" Grid.Row="0" Margin="10"/>
 
-            <Button x:Name="ButtonGoToSummary" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Summary" Margin="10" Pressed="GoToSummary"/>
+            <Button x:Name="ButtonGoToSummary" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Go To Summary" Margin="10" Pressed="GoToSummary"/>
             <Button x:Name="ButtonResetDB" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Text="Reset DB" Margin="10" Pressed="ResetDB"/>
         </Grid>
     </ContentPage>
