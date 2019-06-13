@@ -108,7 +108,20 @@ namespace PiętkaApp
 
         private void ResetDB(object sender, EventArgs e) {
             dataBase.DropTable<Transaction>();
-            DisplayAlert("Info", "DB Deleted", "Ok");
+            int j = 0;
+
+            var filesList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+
+            if(filesList.Length > 0) {
+                for(int i = 0; i < filesList.Length; i++) {
+                    if (filesList[i].ToString().Contains(".db3")) {
+                        File.Delete(filesList[i]);
+                        j++;
+                    }
+                }
+            }
+
+            DisplayAlert("Info", "DB Deleted " + j, "Ok");
         }
 
         private async void GoToBusinessPanel(object sender, EventArgs e) {
