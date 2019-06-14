@@ -48,6 +48,17 @@ namespace PiętkaApp{
             labelFirstPage.Text = Math.Round(budget, 2).ToString();
         }
 
+        public static float CalculateBudget(SQLiteConnection dataBase) {
+            float budget = 0f;
+
+            var transactionViewString = dataBase.Table<Transaction>().ToList();
+            foreach (var signleTransaction in transactionViewString) {
+                budget += signleTransaction.Cash;
+            }
+
+            return (float)Math.Round(budget, 2);
+        }
+
         public static void CalculateMoneySpent(SQLiteConnection dataBase, Label label) {
             float moneySpent = 0f;
 

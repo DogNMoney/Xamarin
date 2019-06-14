@@ -18,6 +18,7 @@ namespace PiętkaApp
 
         SQLiteConnection dataBase;
         SQLiteConnection dataBaseBusiness;
+        bool calculateBudgetFromPrevMonth = false;
 
         public void ReadDatabase() {
             String dataBasePath = String.Empty;
@@ -25,13 +26,14 @@ namespace PiętkaApp
 
             try {
 
-                String pathSufix = DateTime.Today.Month.ToString() + ".db3";
+                String pathSufix = DateTime.Today.Month.ToString() + "R" + DateTime.Today.Year.ToString() + ".db3";
                 String pathSufixBS = DateTime.Today.Month.ToString() + "BS" + ".db3";
                 dataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufix);
                 dataBaseBusinessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufixBS);
 
-                if (!File.Exists(dataBasePath))
-                    DisplayAlert("Information", "New Database for new month created", "Ok");
+                if (!File.Exists(dataBasePath)) {
+                    calculateBudgetFromPrevMonth = true;
+                }
 
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
@@ -40,6 +42,10 @@ namespace PiętkaApp
 
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 ViewTransactionManager.SetLastDepositor(dataBase, LabelLastDepositValue, PickerPerson);
+
+                if(calculateBudgetFromPrevMonth == true) {
+                    TransactionAdd();
+                }
 
             } catch (Exception ex) {
                 DisplayAlert("Exception!", ex.Message, "Ok");
@@ -85,6 +91,25 @@ namespace PiętkaApp
             }
         }
 
+        private void TransactionAdd() {
+            Transaction transaction;
+            int prevMonthDB = DateTime.Today.Month - 1;
+            String pathSufix = prevMonthDB.ToString() + "R" + DateTime.Today.Year.ToString() + ".db3";
+            String oldDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufix);
+            SQLiteConnection oldDB;
+
+            if(File.Exists(oldDBPath) == true) {
+                try {
+                    oldDB = new SQLiteConnection(oldDBPath);
+                    oldDB.CreateTable<Transaction>();
+
+                    transaction = new Transaction(DateTime.Now, "Budget from prev month", ViewTransactionManager.CalculateBudget(oldDB), true);
+                } catch (Exception ex) {
+                    DisplayAlert("Exception!", ex.Message, "Ok");
+                }
+            }
+        }
+
         private void EntryTransactionInputChecker(object sender, TextChangedEventArgs e) {
             try {
                 var entry = sender as Entry;
@@ -114,7 +139,7 @@ namespace PiętkaApp
 
             if(filesList.Length > 0) {
                 for(int i = 0; i < filesList.Length; i++) {
-                    if (filesList[i].ToString().Contains(".db3")) {
+                    if (filesList[i].ToString().Contains(".db3") == true) {
                         File.Delete(filesList[i]);
                         j++;
                     }
@@ -126,6 +151,19 @@ namespace PiętkaApp
 
         private async void GoToBusinessPanel(object sender, EventArgs e) {
             await Navigation.PushAsync(new OwnBusiness(dataBaseBusiness));
+        }
+
+        private void ShowDB(object sender, EventArgs e) {
+            String toDisplay = String.Empty;
+            var filesList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+
+            foreach(var file in filesList) {
+                if (file.ToString().Contains(".db3") == true) {
+                    toDisplay += file.ToString() + "\r\n";
+                }
+            }
+
+            DisplayAlert("Tst", toDisplay, "Ok");
         }
     }
 }
