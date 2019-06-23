@@ -80,7 +80,7 @@ namespace PiętkaApp{
             var transactionViewString = dataBase.Table<Transaction>().ToList();
             foreach (var signleTransaction in transactionViewString) {
                 if (signleTransaction.IsDeposit == true) {
-                    if(signleTransaction.Title == "Kasia") {
+                    if(signleTransaction.Title.Contains("Kasia") == true) {
                         moneyAddedAnotherPerson += signleTransaction.Cash;
                     } else {
                         moneyAddedYou += signleTransaction.Cash;

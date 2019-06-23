@@ -28,8 +28,8 @@ namespace PiętkaApp
 
                 String pathSufix = DateTime.Today.Month.ToString() + "R" + DateTime.Today.Year.ToString() + ".db3";
                 String pathSufixBS = DateTime.Today.Month.ToString() + "BS" + ".db3";
-                dataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufix);
-                dataBaseBusinessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufixBS);
+                dataBasePath = DependencyService.Get<IPathGenerator>().GetPath(pathSufix);
+                //dataBaseBusinessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), pathSufixBS);
 
                 if (!File.Exists(dataBasePath)) {
                     calculateBudgetFromPrevMonth = true;
@@ -37,8 +37,8 @@ namespace PiętkaApp
 
                 dataBase = new SQLiteConnection(dataBasePath);
                 dataBase.CreateTable<Transaction>();
-                dataBaseBusiness = new SQLiteConnection(dataBaseBusinessPath);
-                dataBaseBusiness.CreateTable<Business>();
+                //dataBaseBusiness = new SQLiteConnection(dataBaseBusinessPath);
+                //dataBaseBusiness.CreateTable<Business>();
 
                 ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
                 ViewTransactionManager.SetLastDepositor(dataBase, LabelLastDepositValue, PickerPerson);
