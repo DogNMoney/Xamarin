@@ -104,6 +104,10 @@ namespace PiętkaApp
                     oldDB.CreateTable<Transaction>();
 
                     transaction = new Transaction(DateTime.Now, "Budget from prev month", ViewTransactionManager.CalculateBudget(oldDB), true);
+                    dataBase.Insert(transaction);
+                    ViewTransactionManager.CalculateBudget(dataBase, LabelShoppingBudgetValue);
+                    DisplayAlert("Information", "Added Busget from prev month", "Ok");
+
                 } catch (Exception ex) {
                     DisplayAlert("Exception!", ex.Message, "Ok");
                 }
