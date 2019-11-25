@@ -2,13 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PietkaGymApp"
-             x:Class="PietkaGymApp.MainPage">
+             x:Class="PietkaGymApp.MainPage"
+             Title="Main Page"
+             NavigationPage.HasNavigationBar="False">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Label Text="Witaj Pakierze Trenerze!" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0"/>
+
+        <Button Text="Ćwicz!" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="SwitchToTrainingSection"/>
+        <Button Text="Zobacz Progress!" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="SwitchToProgressSection"/>
+    </Grid>
 
 </ContentPage>
