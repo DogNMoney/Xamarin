@@ -14,10 +14,10 @@ namespace PietkaGymApp
         }
 
         private async void GoToTrainingSection(object sender, EventArgs e) {
-            await Navigation.PushAsync(new TrainingSection()); // TODO Nowy obiekt Strony sekcji cwiczen
+            await Navigation.PushAsync(new TrainingSection());
         }
 
-        private void GoToProgressSection(object sender, EventArgs e) {
+        private async void GoToProgressSection(object sender, EventArgs e) {
             await Navigation.PushAsync(); // TODO Nowy obiekt Strony sekcji progresu
         }
     }

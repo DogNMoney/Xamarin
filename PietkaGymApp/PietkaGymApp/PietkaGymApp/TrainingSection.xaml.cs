@@ -10,8 +10,8 @@ using Xamarin.Forms.Xaml;
 namespace PietkaGymApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TrainingSection : ContentPage
-    {
+    public partial class TrainingSection : ContentPage{
+
         public TrainingSection() {
             InitializeComponent();
         }
