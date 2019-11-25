@@ -3,10 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PietkaGymApp.TrainingSection">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="Wybierz jak chcesz przegladac progres" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0"/>
+
+            <Button Text="Przegladaj konkretne dni" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="GoToTrainingDays"/>
+            <Button Text="Przegladaj konkretne cwiczenia" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="GoToWorkouts"/>
+            <Button Text="Przegladaj swoje statystyki" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="GoToPersonalStats"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
