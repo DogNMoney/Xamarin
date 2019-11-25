@@ -13,11 +13,11 @@ namespace PietkaGymApp
             InitializeComponent();
         }
 
-        private async void SwitchToTrainingSection(object sender, EventArgs e) {
-            await Navigation.PushAsync(); // TODO Nowy obiekt Strony sekcji cwiczen
+        private async void GoToTrainingSection(object sender, EventArgs e) {
+            await Navigation.PushAsync(new TrainingSection()); // TODO Nowy obiekt Strony sekcji cwiczen
         }
 
-        private void SwitchToProgressSection(object sender, EventArgs e) {
+        private void GoToProgressSection(object sender, EventArgs e) {
             await Navigation.PushAsync(); // TODO Nowy obiekt Strony sekcji progresu
         }
     }

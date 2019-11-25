@@ -18,8 +18,8 @@
 
         <Label Text="Witaj Pakierze Trenerze!" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="0"/>
 
-        <Button Text="Ćwicz!" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="SwitchToTrainingSection"/>
-        <Button Text="Zobacz Progress!" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="SwitchToProgressSection"/>
+        <Button Text="Ćwicz!" Margin="10" Grid.Column="0" Grid.Row="1" Pressed="GoToTrainingSection"/>
+        <Button Text="Zobacz Progress!" Margin="10" Grid.Column="0" Grid.Row="2" Pressed="GoToProgressSection"/>
     </Grid>
 
 </ContentPage>
